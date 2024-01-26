@@ -129,57 +129,245 @@
 // }
 // console.log(getFreq(phrase));
 // console.log(getTopWordsFreq(phrase));
-class Student{
-    ecole = 'Jule ferry';
-    _notes=[]
-    #secret = 'secret'
-    constructor(firstname, lastname){
-        this.firstname = firstname;
-        this.lastname = lastname;
-    }
-    setNotes(notes){
-        this.notes = notes;
-    }
-    canPass(){
-        return this.getAverage(this) >= Student.moyenne;
-    }
-    set notes(note){
-        if (Array.isArray(note)){
-            this._notes = note;
-        }
-        else{
-            throw new Error('notes must be an array');
-        }
-    }
-    get name(){
-        return `${this.firstname} ${this.lastname}`;
-    }
-    get notes(){
-        return this._notes;
-    }
-    getAverage(students){
-        // if (students.notes === array){
-        return students._notes.reduce((a, b) => a + b) / students._notes.length;
-    }
-    static moyenne = 10
-}
-class SuperStudent extends Student{
-    constructor(firstname, lastname,notes){
-        super(firstname, lastname);
-        this.notes = notes;
-    }
-    get name(){
-        return `Super ${super.name}`;
-    }
-    canPass(){
-        return super.canPass()
-    }
-}
-    const john = new SuperStudent('John', 'Doe',[0,10,8]);
-    const jane = new Student('Jane', 'Doe');
-    jane.setNotes([15,18,19])
-    // console.log(john.getAverage(john));
-    console.log(john.canPass());
+// class Student{
+//     ecole = 'Jule ferry';
+//     _notes=[]
+//     #secret = 'secret'
+//     constructor(firstname, lastname){
+//         this.firstname = firstname;
+//         this.lastname = lastname;
+//     }
+//     setNotes(notes){
+//         this.notes = notes;
+//     }
+//     canPass(){
+//         return this.getAverage(this) >= Student.moyenne;
+//     }
+//     set notes(note){
+//         if (Array.isArray(note)){
+//             this._notes = note;
+//         }
+//         else{
+//             throw new Error('notes must be an array');
+//         }
+//     }
+//     get name(){
+//         return `${this.firstname} ${this.lastname}`;
+//     }
+//     get notes(){
+//         return this._notes;
+//     }
+//     getAverage(students){
+//         // if (students.notes === array){
+//         return students._notes.reduce((a, b) => a + b) / students._notes.length;
+//     }
+//     static moyenne = 10
+// }
+// class SuperStudent extends Student{
+//     constructor(firstname, lastname,notes){
+//         super(firstname, lastname);
+//         this.notes = notes;
+//     }
+//     get name(){
+//         return `Super ${super.name}`;
+//     }
+//     canPass(){
+//         return super.canPass()
+//     }
+// }
+//     const john = new SuperStudent('John', 'Doe',[0,10,8]);
+//     const jane = new Student('Jane', 'Doe');
+//     jane.setNotes([15,18,19])
+//     // console.log(john.getAverage(john));
+//     console.log(john.canPass());
     // console.log(jane.canPass());
     // console.log(john.moyenne);
     // console.log(jane.moyenne);
+
+
+// class Rectangle{
+//     constructor(width,height){
+//         if (this.isValid(width,height)){
+//             this.width= width
+//             this.height= height
+//         }
+//     }
+//     perimeter(){
+//         return (this.width + this.height) *2
+//     }
+//     isValid(width,height){ 
+//         if (width > 0 && height > 0){
+//             if (width != height ){
+//                 console.log("rectangle is valid")
+//                 return true
+//             }else{
+//                 console.log("width can't be bigger than height")
+//                 return false
+//             }
+//         }else{
+//             return false
+//         }
+        
+//     }
+//     isBiggerThan(form){
+//         if (this.perimeter > form.perimeter){
+//             console.log("your object is bigger than function parameter")
+//             return true
+//         }else{
+//             console.log("your object is smaller than function parameter")
+//             return false
+//         }
+//     }
+// }
+// class Square extends Rectangle{
+//     constructor(width){
+//         super(width,width)
+//     }
+//     get perimeter(){
+//         return this.width * 4;
+//     }
+  
+// }
+    
+// const r = new Rectangle(10, 20);
+// console.log(r)
+// console.log(r.perimeter) // 60
+// console.log(r.isValid) // true
+// console.log(r2.isValid) // false
+// const c = new Square(10); 
+// console.log(c.perimeter) // 40
+// console.log(r.isBiggerThan(c))
+// function promptRectangle(){
+//     try{
+//         const width = parseInt(prompt('Largeur'),10);
+//         const height = parseInt(prompt('hauteur'),10);
+//         const r = new Rectangle(width, height);
+//         console.log(r);
+//         return r;
+
+//     }catch (e){
+//         throw new Error("input user invalid");
+//         console.log("impossible de créer le rectangle");
+    
+//     }
+// }
+// try{
+//     promptRectangle()
+// }catch(e){
+//     console.log(e.message,{e})
+// }
+// class Book{
+
+//     constructor(title,pages){
+//         this.title = title;
+//         this.pages = pages;
+//     }
+//     #page = 1;
+//     get page(){
+//         return this.#page;
+//     }
+//     nextPage(){
+//         if (this.#page < this.pages){
+//             this.#page += 1;
+//         }
+//     }
+//     close(){
+//         this.#page = 1;
+//     }
+
+// }
+
+// class Library {
+//     static library = [];
+//     addBook(book){
+//         Library.library.push(book);
+//     }
+//     addBooks(books){
+//         if (Array.isArray(books)){
+//             books.forEach(book => {
+//                 Library.library.push(book);
+//             });
+//         }
+//     }
+//     findBooksByLetter(letter){
+//         let regex = new RegExp('^' + letter, 'i');
+//         let books_list = [];
+//         Library.library.forEach(book => {
+//             if (book.title.match(regex)){
+//                 books_list.push(book.title);
+//             }
+//         });
+//         return books_list;
+//     }
+// }
+// const b = new Book('Seigneur des anneaux', 200);
+// console.log(b.page)
+// b.nextPage()
+// console.log(b.page)
+// b.close()
+// console.log(b.page)
+
+// const l = new Library()
+// l.addBook(b)
+// l.addBooks([
+//     new Book('Ready player one', 100),
+//     new Book('Oui-oui', 10),
+//     new Book('Sillage', 50),
+// ])
+// console.log(l.findBooksByLetter('S'))
+
+// let i = 0;
+// let a =0
+// a ||=3
+// i = a ?? 1;
+// // console.log(i);
+// const [premiere,... autrenote] = [1,3,5]
+// console.log(premiere,autrenote);
+// const {firstname, ... rest} = {
+//     firstname: 'John',
+//     lastname: 'Doe',
+//     age: 42,
+// }
+// console.log(firstname,rest);
+// function canDrive({age, pays,region = 'Paris'}){
+//     console.log(region)
+//     return true;
+// }
+// canDrive({age: 18, pays: 'France', region: 'Texas'}) // true
+// let notes = [1,3]
+// notes = [...notes,5]
+// console.log(notes);
+
+// let person = {firstname: 'John', lastname: 'Doe'}
+// let person2 = {...person,firstname : 'Jane'}
+// console.log(person2);
+
+// const age = 42;
+// const pays = 'France';
+// const message = age > 18 ? (pays === 'France' ? 'Conduite' : 'a voir') : 'mineur';
+// console.log(message);
+
+// function wait(duration){
+//     const t = Date.now()
+//     while (Date.now() - t < duration){
+//         //nothing
+//     }  
+// }
+// console.log('start')
+// const t = setInterval(() => {
+//     console.log('interval')
+// }, 1000);
+// console.log(t)
+// console.log('end')
+// function countdown(duration){
+//     const t = setInterval(()=> {
+//         console.log(duration)
+//         duration -= 1
+//         if (duration < 0){
+//             clearInterval(t)
+//         }
+//     },1000)
+//     console.log(t)
+    
+// }
+// countdown(5) // 5 4 3 2 1 0
