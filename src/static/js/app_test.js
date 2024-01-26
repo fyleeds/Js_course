@@ -96,14 +96,6 @@
 //         notes: [18, 17, 18, 19, 12]
 //     }
 // ];
-// function getAverage(students){
-
-//     for(let i = 0; i< students.length;i++){
-//         students[i].moyenne = students[i].notes.reduce((accumulator, currentValue) => accumulator + currentValue) / students[i].notes.length;
-//     }
-//     return students;
-
-// }
 // function getTop3(students){
 //     return  getAverage(students).sort((a,b) => b.moyenne - a.moyenne).slice(0,3);
 
@@ -137,3 +129,57 @@
 // }
 // console.log(getFreq(phrase));
 // console.log(getTopWordsFreq(phrase));
+class Student{
+    ecole = 'Jule ferry';
+    _notes=[]
+    #secret = 'secret'
+    constructor(firstname, lastname){
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+    setNotes(notes){
+        this.notes = notes;
+    }
+    canPass(){
+        return this.getAverage(this) >= Student.moyenne;
+    }
+    set notes(note){
+        if (Array.isArray(note)){
+            this._notes = note;
+        }
+        else{
+            throw new Error('notes must be an array');
+        }
+    }
+    get name(){
+        return `${this.firstname} ${this.lastname}`;
+    }
+    get notes(){
+        return this._notes;
+    }
+    getAverage(students){
+        // if (students.notes === array){
+        return students._notes.reduce((a, b) => a + b) / students._notes.length;
+    }
+    static moyenne = 10
+}
+class SuperStudent extends Student{
+    constructor(firstname, lastname,notes){
+        super(firstname, lastname);
+        this.notes = notes;
+    }
+    get name(){
+        return `Super ${super.name}`;
+    }
+    canPass(){
+        return super.canPass()
+    }
+}
+    const john = new SuperStudent('John', 'Doe',[0,10,8]);
+    const jane = new Student('Jane', 'Doe');
+    jane.setNotes([15,18,19])
+    // console.log(john.getAverage(john));
+    console.log(john.canPass());
+    // console.log(jane.canPass());
+    // console.log(john.moyenne);
+    // console.log(jane.moyenne);
