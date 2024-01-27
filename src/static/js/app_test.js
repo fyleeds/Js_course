@@ -347,12 +347,12 @@
 // const message = age > 18 ? (pays === 'France' ? 'Conduite' : 'a voir') : 'mineur';
 // console.log(message);
 
-// function wait(duration){
-//     const t = Date.now()
-//     while (Date.now() - t < duration){
-//         //nothing
-//     }  
-// }
+function waitSync(duration){
+    const t = Date.now()
+    while (Date.now() - t < duration){
+        //nothing
+    }  
+}
 // console.log('start')
 // const t = setInterval(() => {
 //     console.log('interval')
@@ -371,3 +371,86 @@
     
 // }
 // countdown(5) // 5 4 3 2 1 0
+
+// const p = new Promise((resolve,reject) => {
+//     resolve(4)
+// })
+// p.then((n)=>{
+//     console.log("le nombre",n)
+//     throw new Error("erreur")
+// })
+// .then((n) => {console.log("Le nombre 2",n)})
+// .catch((e)=>  {
+//     console.log("erreur",e)
+//     return 5
+// })
+// .then((n) => {console.log("Le nombre 3",n)})
+
+function wait(duration){
+    return new Promise((resolve,reject) => {
+        setTimeout(() => {
+            resolve(duration)
+        }, duration);
+    })
+}
+
+function waitAndFail(duration){
+    return new Promise((resolve,reject) => {
+        setTimeout(() => {
+            reject(duration)
+        }, duration);
+    })
+}
+
+async function main(){
+    // try{
+    //     await waitAndFail(2000)
+    //     console.log("Bonjour")
+    //     await wait(1000)
+    //     console.log("Au revoir")
+    // }catch(e){
+    //     console.log("erreur",e)
+    // }
+    const duration = await wait(2000)
+    console.log(duration)
+    return 5
+}
+
+// const p = new Promise((resolve,reject) => {
+//     console.log("Hello")
+//     resolve(4)
+// })
+// waitSync(4000)
+// console.log("les gens")
+// console.log(main()) 
+// wait(2000)
+// .then(() => {console.log('ok 2s')
+// return wait(1000)
+// }
+// )
+// .then(() => {console.log('ok 1s')
+// return waitAndFail(1000)
+// })
+// .catch((e) => {console.log('erreur',e)})
+
+// function waitAndLog(duration,msg){
+//     return wait(duration).then(() => console.log(msg))
+// }
+
+async function fetchUsers(){
+    const r = await fetch(
+        "https://jsonplaceholder.typicode.com/posts",
+        {
+        method:'POST',
+        headers:{"Accept": "application/json",
+        "Content-Type": "application/json"},
+        body: JSON.stringify({title: "foo", body: "bar", userId: 1})
+        }
+    )
+    if (!r.ok){
+        throw new Error("Serveur indisponible")
+    }
+    return r.json()
+}
+
+fetchUsers().then(users => console.log(users))
