@@ -104,7 +104,11 @@
 // console.log(getAverage(students));
 
 // const phrase = `Vous savez, moi je ne crois pas qu’il y ait de bonne ou de mauvaise situation. Moi, si je devais résumer ma vie aujourd’hui avec vous, je dirais que c’est d’abord des rencontres.`
-
+// /**
+//  * 
+//  * @param {string} phrase 
+//  * @returns {Array <object>}
+//  */
 // function getFreq(phrase){
 //     let frequenciesArray = [];
 //     array = phrase.replaceAll(/[,:.?]/g , "").toLowerCase().split(" ")
@@ -116,14 +120,13 @@
 //         word.word = element;
 //         word.count = count;
 //         frequenciesArray.push(word);
-  
-
 //     });
 //     // Remove duplicates
 //     frequenciesArray = frequenciesArray.filter((v, i, a) => a.findIndex(t => (t.word === v.word)) === i);
 //     return frequenciesArray;
-    
 // }
+// const a = getFreq("test test")
+
 // function getTopWordsFreq(words){
 //     return  getFreq(words).sort((a,b) => b.count - a.count).slice(0,3);
 // }
@@ -184,41 +187,52 @@
     // console.log(john.moyenne);
     // console.log(jane.moyenne);
 
-
-// class Rectangle{
-//     constructor(width,height){
-//         if (this.isValid(width,height)){
-//             this.width= width
-//             this.height= height
-//         }
-//     }
-//     perimeter(){
-//         return (this.width + this.height) *2
-//     }
-//     isValid(width,height){ 
-//         if (width > 0 && height > 0){
-//             if (width != height ){
-//                 console.log("rectangle is valid")
-//                 return true
-//             }else{
-//                 console.log("width can't be bigger than height")
-//                 return false
-//             }
-//         }else{
-//             return false
-//         }
+/**
+ * @typedef {Object} Rectangle
+ * @property {number} width
+ * @property {number} height
+ * @param {number} width
+ * @param {number} height
+ */
+class Rectangle{
+    constructor(width,height){
+        if (this.isValid(width,height)){
+            /**
+             * @type {number}
+             * Largeur du rectangle
+             */
+            this.width= width
+            this.height= height
+        }
+    }
+    perimeter(){
+        return (this.width + this.height) *2
+    }
+    isValid(width,height){ 
+        if (width > 0 && height > 0){
+            if (width != height ){
+                console.log("rectangle is valid")
+                return true
+            }else{
+                console.log("width can't be bigger than height")
+                return false
+            }
+        }else{
+            return false
+        }
         
-//     }
-//     isBiggerThan(form){
-//         if (this.perimeter > form.perimeter){
-//             console.log("your object is bigger than function parameter")
-//             return true
-//         }else{
-//             console.log("your object is smaller than function parameter")
-//             return false
-//         }
-//     }
-// }
+    }
+    isBiggerThan(form){
+        if (this.perimeter > form.perimeter){
+            console.log("your object is bigger than function parameter")
+            return true
+        }else{
+            console.log("your object is smaller than function parameter")
+            return false
+        }
+    }
+}
+const r = new Rectangle()
 // class Square extends Rectangle{
 //     constructor(width){
 //         super(width,width)
@@ -386,6 +400,13 @@ function waitSync(duration){
 // })
 // .then((n) => {console.log("Le nombre 3",n)})
 
+
+/**
+ * Permet de faire une pause pour une durée donnée
+ * @param {int} duration 
+ * @returns 
+ */
+
 function wait(duration){
     return new Promise((resolve,reject) => {
         setTimeout(() => {
@@ -437,20 +458,31 @@ async function main(){
 //     return wait(duration).then(() => console.log(msg))
 // }
 
-async function fetchUsers(){
-    const r = await fetch(
-        "https://jsonplaceholder.typicode.com/posts",
-        {
-        method:'POST',
-        headers:{"Accept": "application/json",
-        "Content-Type": "application/json"},
-        body: JSON.stringify({title: "foo", body: "bar", userId: 1})
-        }
-    )
-    if (!r.ok){
-        throw new Error("Serveur indisponible")
-    }
-    return r.json()
-}
+// async function fetchUsers(){
+//     const r = await fetch(
+//         "https://jsonplaceholder.typicode.com/posts",
+//         {
+//         method:'POST',
+//         headers:{"Accept": "application/json",
+//         "Content-Type": "application/json"},
+//         body: JSON.stringify({title: "foo", body: "bar", userId: 1})
+//         }
+//     )
+//     if (!r.ok){
+//         throw new Error("Serveur indisponible")
+//     }
+//     return r.json()
+// }
 
-fetchUsers().then(users => console.log(users))
+// fetchUsers().then(users => console.log(users))
+// const a = new AbortController()
+// Promise.race(
+//     [
+//         fetch("https://jsonplaceholder.typicode.com/todos/?_limit=5 &_delay=5000",{signal:a.signal}),
+//         fetch("https://jsonplaceholder.typicode.com/users/?_limit=3",{signal:a.signal})
+//     ]
+// ).then(r=> r.json()).then(body =>{
+//     a.abort()
+//     console.log(body)
+// }
+// )
