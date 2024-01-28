@@ -35,33 +35,101 @@
 // )
 
 // ul.append(li.cloneNode(true))
-let div = document.querySelector('lastPosts')
-
-function LoadPosts() {
-    fetch("https://jsonplaceholder.typicode.com/posts/?_limit=5")
-        .then(response => {
-            if (!r.ok){
-                throw new Error("Serveur indisponible")
-            }{
-            response.json()
-            console.log("ok")
-            }
-        })
-        .then((data) => {
-            const listItem = document.createElement("ul");
-            div.appendChild(listItem);
-            for (const post of data.posts) {
-                listItem.appendChild(document.createElement("li")).textContent= post.Title;
-            }
-            
-
-        })
-        .catch(console.error);
-
-        // .then(json => {
-        //     let html = json.map(item => {
-        //         return `<li>${item.title}</li>`
-        //     }).join(' ')
-        //     div.innerHTML = html
-        // })
+function createPost(post) {
+    let li = document.createElement("li");
+    li.append(createElement("h2",post.title,null), createElement("p",post.body,null));
+    return li;
 }
+
+function createElement(tag, content, attributes) {
+    let element = document.createElement(tag);
+    element.innerText = content;
+    if (attributes === undefined) {
+        return element;
+    }
+    for (let attr in attributes) {
+        element.setAttribute(attr, attributes[attr]);
+    }
+    return element;
+}
+
+async function LoadPosts(div,p) {
+    await fetch("https://jsonplaceholder.typicode.com/posts/?_limit=5",
+    {method: "GET",
+    headers: {"Content-Type": "application/json"}})
+    .then(r => {
+        if (!r.ok){
+            throw new Error("Serveur indisponible")
+        }
+        // console.log("ok")
+        return r.json()
+    })
+    .then((data) => {
+        // console.log(data);
+        let listItem = document.createElement("ul");
+        for (let post of data) {
+            listItem.append(createPost(post));
+        }
+        // console.log(listItem.innerHTML);
+        div.append(listItem);
+        p.remove();
+    })
+    .catch(() => {
+        p.textContent = "Serveur indisponible";
+        p.style.color = "red";
+        console.error
+    });
+}
+function OnClickedButton(e){
+    // console.log(this)
+    // console.log(e.currentTarget)
+    console.log("on button clicked")
+    // e.stopPropagation()
+}
+function OnDivClicked(e){
+    console.log("on div clicked")
+
+}
+function OnDivScroll(e){
+    console.log("on div scroll")
+    e.preventDefault()
+
+}
+function submitForm(e){
+    const form = e.currentTarget
+    const data = new FormData(form)
+    let firstname = data.get("firstname")
+    console.log(firstname)
+    if (firstname.length < 3) {
+        console.log("firstname too short")
+        e.preventDefault()
+    }
+}
+function change(e){
+    options_array = Array.from(e.currentTarget.selectedOptions).map(option =>option.value)
+    console.log(options_array)
+
+
+}
+function revealSpoiler(e){
+    e.currentTarget.classList.remove("spoiler")
+}
+async function main(){
+    const spoilers = document.querySelectorAll('.spoiler')
+    for (let spoiler of spoilers){
+        spoiler.addEventListener('click', revealSpoiler)
+    }
+    // const button = document.querySelector("button");
+    // let div = document.querySelector('#scrollDiv')
+    // button.addEventListener("click", OnClickedButton)
+    // window.addEventListener("scroll", OnDivScroll,{passive: true})
+    // await LoadPosts(div, p);
+    // const form = document.querySelector("form");
+    // const input = document.querySelector("#agreeterms");
+    // const select = document.querySelector("select");
+    // form.addEventListener("submit", submitForm);
+    // input.addEventListener("change", change);
+    // select.addEventListener("change", change);
+
+}
+main()
