@@ -187,52 +187,52 @@
     // console.log(john.moyenne);
     // console.log(jane.moyenne);
 
-/**
- * @typedef {Object} Rectangle
- * @property {number} width
- * @property {number} height
- * @param {number} width
- * @param {number} height
- */
-class Rectangle{
-    constructor(width,height){
-        if (this.isValid(width,height)){
-            /**
-             * @type {number}
-             * Largeur du rectangle
-             */
-            this.width= width
-            this.height= height
-        }
-    }
-    perimeter(){
-        return (this.width + this.height) *2
-    }
-    isValid(width,height){ 
-        if (width > 0 && height > 0){
-            if (width != height ){
-                console.log("rectangle is valid")
-                return true
-            }else{
-                console.log("width can't be bigger than height")
-                return false
-            }
-        }else{
-            return false
-        }
+// /**
+//  * @typedef {Object} Rectangle
+//  * @property {number} width
+//  * @property {number} height
+//  * @param {number} width
+//  * @param {number} height
+//  */
+// class Rectangle{
+//     constructor(width,height){
+//         if (this.isValid(width,height)){
+//             /**
+//              * @type {number}
+//              * Largeur du rectangle
+//              */
+//             this.width= width
+//             this.height= height
+//         }
+//     }
+//     perimeter(){
+//         return (this.width + this.height) *2
+//     }
+//     isValid(width,height){ 
+//         if (width > 0 && height > 0){
+//             if (width != height ){
+//                 console.log("rectangle is valid")
+//                 return true
+//             }else{
+//                 console.log("width can't be bigger than height")
+//                 return false
+//             }
+//         }else{
+//             return false
+//         }
         
-    }
-    isBiggerThan(form){
-        if (this.perimeter > form.perimeter){
-            console.log("your object is bigger than function parameter")
-            return true
-        }else{
-            console.log("your object is smaller than function parameter")
-            return false
-        }
-    }
-}
-const r = new Rectangle()
+//     }
+//     isBiggerThan(form){
+//         if (this.perimeter > form.perimeter){
+//             console.log("your object is bigger than function parameter")
+//             return true
+//         }else{
+//             console.log("your object is smaller than function parameter")
+//             return false
+//         }
+//     }
+// }
+// const r = new Rectangle()
 // class Square extends Rectangle{
 //     constructor(width){
 //         super(width,width)
