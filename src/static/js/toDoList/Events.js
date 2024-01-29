@@ -1,4 +1,4 @@
-import {Task, Task as task} from "./Task.js";
+import { Task as task} from "./Task.js";
 
 let tasks = document.querySelector("ul");
 
@@ -13,9 +13,8 @@ function submitForm(e){
         e.preventDefault()
     }else{
         let new_task = new task(title, false)
-        let task_element = new_task.createTaskElement(new_task)
-        task_element.querySelector(".btn-danger").addEventListener("click", OnClickedRubbishButton)
-        tasks.append(task_element)
+        new_task.querySelector(".btn-danger").addEventListener("click", OnClickedRubbishButton)
+        tasks.append(new_task)
         e.preventDefault()
     }
 }
