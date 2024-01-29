@@ -16,7 +16,7 @@ app.use(express.static(__dirname + '/static'));
 
 
 
-app.listen(8080, () => console.log('Listening on port 8080'));
+app.listen(7000, () => console.log('Listening on port 7000'));
 
 
 // const gracefulShutdown = () => {

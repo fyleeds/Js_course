@@ -9,18 +9,18 @@
 class Task {
     /** @type {Task} */
     constructor(title, status) {
-        //creating list
-        let li = Task.createElementCustom("li","", { class:"todo list-group-item d-flex align-items-center"})
+        let li = document.getElementById("todolist-item").content.cloneNode(true).firstElementChild;
         //creating task id
         let task_id = Math.floor(Math.random() * 1000000000);
         //creating checkbox
-        let input = Task.createElementCustom("input","",{class:"form-check-input me-1",type:"checkbox",value:"",id:`todo-${task_id}`})
+        let input = li.querySelector("input")
+        input.setAttribute("id",`todo-${task_id}`)
         //creating label
-        let label = Task.createElementCustom("label",title,{class:"ms-2 form-check-label",for:`todo-${task_id}`})
+        let label = li.querySelector("label")
+        label.setAttribute("for",`todo-${task_id}`)
+        label.innerText = title;
         // creating rubbish button
-        let rubbish = Task.createElementCustom("label","",{class:"ms-auto btn btn-danger btn-sm"})
-        let rubbish_icon = Task.createElementCustom("i","",{class:"bi-trash"})
-        rubbish.append(rubbish_icon)
+        let rubbish = li.querySelector(".btn-danger")
         // append to list
         li.append(input,label,rubbish);
         return li;

@@ -1,17 +1,14 @@
 import { Task as task} from "./Task.js";
 
-let tasks = document.querySelector("ul");
-
-
 function submitForm(e){
     const form = e.currentTarget
     const data = new FormData(form)
     let title = data.get("title")
     if (title.length < 1) {
-        console.log("no title")
         alert("no title : please insert a title ! ")
         e.preventDefault()
     }else{
+        let tasks = document.querySelector("ul");
         let new_task = new task(title, false)
         new_task.querySelector(".btn-danger").addEventListener("click", OnClickedRubbishButton)
         tasks.append(new_task)
@@ -19,9 +16,7 @@ function submitForm(e){
     }
 }
 function OnClickedRubbishButton(e){
-    console.log(e.currentTarget)
     let task = e.currentTarget.parentNode;
-    console.log(task)
     task.remove()
 }
 
@@ -82,7 +77,18 @@ function toggleButtonsStatus(button_selected){
     button_selected.classList.add("active")
 }
 
+/**
+ * 
+ * @param {*} element 
+ * @returns {HTMLElement}
+ */
+function appendTo(element){
+    element.append(
+        document.getElementById("todolist-layout").content.cloneNode(true)
+    )
+}
 async function main(){
+    appendTo(document.querySelector("#todolist"))
 
     const form = document.querySelector("form")
     form.addEventListener("submit", submitForm)
