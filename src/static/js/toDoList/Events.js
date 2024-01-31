@@ -1,23 +1,22 @@
 import { Task as task} from "./Task.js";
 
+/**
+ * 
+ * @param {*} e 
+ * @returns {task}
+ */
 function submitForm(e){
     const form = e.currentTarget
     const data = new FormData(form)
     let title = data.get("title")
     if (title.length < 1) {
+        e.preventDefault()
         alert("no title : please insert a title ! ")
-        e.preventDefault()
+        return
     }else{
-        let tasks = document.querySelector("ul");
-        let new_task = new task(title, false)
-        new_task.querySelector(".btn-danger").addEventListener("click", OnClickedRubbishButton)
-        tasks.append(new_task)
         e.preventDefault()
+        return new task(title, false)
     }
-}
-function OnClickedRubbishButton(e){
-    let task = e.currentTarget.parentNode;
-    task.remove()
 }
 
 function OnClickedTodoButton(e){
@@ -33,14 +32,7 @@ function OnClickedAllButton(e){
     filterByNone()
     toggleButtonsStatus(e.currentTarget)
 }
-function OnClickedCheckbox(e){
-    let task = e.currentTarget.parentNode;
-    if (e.currentTarget.checked){
-        task.classList.add("is-completed")
-    }else{
-        task.classList.remove("is-completed")
-    }
-}
+
 function filterByTodo(){
     let tasks_array = Array.from(document.querySelector("ul").querySelectorAll("li"))
     tasks_array.forEach(element => {
@@ -77,26 +69,13 @@ function toggleButtonsStatus(button_selected){
     button_selected.classList.add("active")
 }
 
-/**
- * 
- * @param {*} element 
- * @returns {HTMLElement}
- */
-function appendTo(element){
-    element.append(
-        document.getElementById("todolist-layout").content.cloneNode(true)
-    )
-}
+
+
 async function main(){
-    appendTo(document.querySelector("#todolist"))
+    task.appendTo(document.querySelector("#todolist"))
 
     const form = document.querySelector("form")
     form.addEventListener("submit", submitForm)
-
-    let rubbish_buttons = document.querySelectorAll(".btn-danger")
-    rubbish_buttons.forEach(rubbish_button => {
-        rubbish_button.addEventListener("click", OnClickedRubbishButton)
-    });
 
     const todo_button = document.querySelector('[data-filter="todo"]');
     todo_button.addEventListener("click", OnClickedTodoButton);
@@ -107,10 +86,6 @@ async function main(){
     const all_button = document.querySelector('[data-filter="all"]');
     all_button.addEventListener("click", OnClickedAllButton);
 
-    let checkboxes = document.querySelectorAll("input[type=checkbox]")
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener("click", OnClickedCheckbox);
-    });
 }
 main()
 

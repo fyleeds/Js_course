@@ -7,6 +7,8 @@
  * @param {bool} status - 2 choices: True if done, false if not.
  */
 class Task {
+    #task
+    #tasks_list = document.querySelector("ul");
     /** @type {Task} */
     constructor(title, status) {
         let li = document.getElementById("todolist-item").content.cloneNode(true).firstElementChild;
@@ -23,7 +25,18 @@ class Task {
         let rubbish = li.querySelector(".btn-danger")
         // append to list
         li.append(input,label,rubbish);
-        return li;
+
+        rubbish.addEventListener("click", (e) => this.remove(e))
+
+        this.#task = li;
+
+        this.#task.addEventListener('remove', (e) => {
+            console.log("removed")
+        })
+
+        this.#tasks_list.append(li);
+
+        
     }
     /** 
      * @param {string} tag
@@ -42,6 +55,28 @@ class Task {
         }
         return element;
     }
+    /**
+    * 
+    * @param {*} element 
+    * @returns {HTMLElement}
+    */
+    static appendTo(element){
+        element.append(
+            document.getElementById("todolist-layout").content.cloneNode(true)
+        )
+    }
+    /**
+     * 
+     * @param {PointerEvent} event
+     * @returns {HTMLElement}
+     */
+    remove(e){
+        e.preventDefault();
+        this.#task.dispatchEvent(new CustomEvent("remove",
+        {detail: {task: this.#task}}))
+        this.#task.remove()
+    }
+
     
 }
 
