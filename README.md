@@ -23,7 +23,7 @@ Ce document fournit des instructions pour tester le projet en utilisant un Docke
 Clonez le repository GitHub contenant les fichiers nécessaires dans un dossier vide :
 
 ```bash
-git clone https://github.com/fyleeds/ecommerce
+git clone https://github.com/fyleeds/Todolist
 
 ```
 
