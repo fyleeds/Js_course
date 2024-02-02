@@ -1,7 +1,7 @@
 
 # README TODOLIST
 
-Ce document fournit des instructions pour tester le projet en récupérant une image Docker et en utilisant un Docker Compose.
+Ce document fournit des instructions pour tester le projet en utilisant un Docker Compose.
 
 ## Prérequis 
 
