@@ -3,6 +3,8 @@
 
 /**
  * Represents a task.
+ * @typedef {Object} Task
+ * @constructor
  * @param {string} title 
  * @param {bool} status - 2 choices: True if done, false if not.
  */
